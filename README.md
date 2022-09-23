@@ -1,4 +1,9 @@
 # MasklessLithographyController
+
+
+![alt text](https://github.com/canyesil/MasklessLithographyController/Application.png?raw=true)
+
+
 Maskless lithography controller which consists of two parts, i.e.,
 
 i)  usb-serial device including micro stage and UV laser driver circuits (Arduino Uno used in the prototype) 

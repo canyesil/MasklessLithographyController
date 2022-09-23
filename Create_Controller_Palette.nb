@@ -1,0 +1,512 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     24998,        504]
+NotebookOptionsPosition[     24459,        488]
+NotebookOutlinePosition[     24854,        504]
+CellTagsIndexPosition[     24811,        501]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"\n", "\n", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"ClearAll", "[", "\"\<Global`*\>\"", "]"}], ";"}], " ", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"SetDirectory", "[", 
+     RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"palet", "=", 
+     RowBox[{
+     "CreatePalette", "[", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"SetDirectory", "[", 
+         RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Import", "[", 
+         RowBox[{
+          RowBox[{"NotebookDirectory", "[", "]"}], " ", "<>", " ", 
+          "\"\<Input_Processing_and_Control_Functions.m\>\""}], "]"}], ";", 
+        "\[IndentingNewLine]", " ", 
+        RowBox[{"img", "=", 
+         RowBox[{"ConstantImage", "[", 
+          RowBox[{"White", ",", "   ", 
+           RowBox[{"{", 
+            RowBox[{"150", ",", " ", "150"}], "}"}]}], "]"}]}], ";", " ", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Export", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"NotebookDirectory", "[", "]"}], " ", "<>", " ", 
+           "\"\<initial.png\>\""}], ",", " ", 
+          RowBox[{"Framed", "[", "img", " ", "]"}]}], "]"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"imgpath", "=", 
+         RowBox[{
+          RowBox[{"NotebookDirectory", "[", "]"}], " ", "<>", " ", 
+          "\"\<initial.png\>\""}]}], ";", " ", "\[IndentingNewLine]", 
+        RowBox[{"img", "=", 
+         RowBox[{"Import", "[", "imgpath", "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"xrn", "=", 
+         RowBox[{"processGetDevices", "[", "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"onoff", "=", "0"}], ";", "\[IndentingNewLine]", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Panel", "[", "\[IndentingNewLine]", 
+         RowBox[{"Column", "[", 
+          RowBox[{"{", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"Panel", "[", "\[IndentingNewLine]", 
+             RowBox[{"Row", "[", 
+              RowBox[{"{", "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{"Panel", "[", "\[IndentingNewLine]", 
+                 RowBox[{
+                  RowBox[{"Column", "[", 
+                   RowBox[{"{", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"Column", "[", 
+                    RowBox[{"{", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"TextCell", "[", 
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    RowBox[{
+                    "Text", "[", 
+                    "\"\<Select input image\\n1.Click the \\\"Browse\\\" \
+button.\\n2.Choose an image to process.\>\"", "  ", "]"}], ",", " ", "12"}], 
+                    "]"}], "]"}], ",", " ", 
+                    RowBox[{"FileNameSetter", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", "imgpath", "]"}], ",", " ", 
+                    "\"\<Open\>\"", ",", " ", 
+                    RowBox[{"{", 
+                    RowBox[{"\"\<Image files\>\"", " ", "->", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    "\"\<*.bmp\>\"", ",", " ", "\"\<*.jpg\>\"", ",", " ", 
+                    "\"\<*.png\>\""}], "}"}]}], "}"}]}], "]"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"sldsample", "=", 
+                    RowBox[{"Slider", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", "sample", "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"1", ",", "20", ",", "1"}], "}"}]}], "]"}]}], ",",
+                     "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"sample", "=", "8"}], ";", 
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    RowBox[{"Text", "[", "\"\<Image Ratio: \>\"", "]"}], ",", 
+                    "12"}], "]"}], ",", 
+                    RowBox[{"Dynamic", "[", "sample", "]"}]}], "}"}], "]"}]}],
+                     ",", "\[IndentingNewLine]", 
+                    RowBox[{"Button", "[", 
+                    RowBox[{"\"\<Upload\>\"", ",", "\[IndentingNewLine]", " ", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"img", ",", " ", "cmretto", ",", " ", "dim"}], 
+                    "}"}], "=", 
+                    RowBox[{"process", "[", 
+                    RowBox[{"imgpath", ",", " ", "sample"}], "]"}]}], ";"}], 
+                    ",", "\[IndentingNewLine]", " ", 
+                    RowBox[{"ImageSize", " ", "->", " ", 
+                    RowBox[{"{", 
+                    RowBox[{"80", ",", " ", "27"}], "}"}]}]}], 
+                    "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+                    "}"}], "]"}], ",", "\[IndentingNewLine]", 
+                    RowBox[{"Button", "[", 
+                    RowBox[{"\"\<Process\>\"", ",", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"lines", " ", "=", " ", 
+                    RowBox[{"process2", "[", 
+                    RowBox[{"dim", ",", " ", "cmretto"}], "]"}]}], ";", 
+                    "\[IndentingNewLine]", " ", 
+                    RowBox[{"plt", " ", "=", " ", 
+                    RowBox[{"ListPlot", "[", 
+                    RowBox[{
+                    RowBox[{"Accumulate", "[", "lines", "]"}], ",", " ", 
+                    RowBox[{"AspectRatio", " ", "->", " ", 
+                    RowBox[{"{", "dim", "}"}]}], ",", " ", 
+                    RowBox[{"PlotStyle", " ", "->", " ", 
+                    RowBox[{"PointSize", "[", "0.008", "]"}]}], ",", " ", 
+                    RowBox[{"ImageSize", " ", "->", " ", "200"}], ",", " ", 
+                    RowBox[{"Frame", " ", "->", " ", "None"}], ",", " ", 
+                    RowBox[{"Axes", " ", "->", " ", "None"}], ",", " ", 
+                    RowBox[{"FrameTicks", " ", "->", " ", "None"}]}], "]"}]}],
+                     ";", "\[IndentingNewLine]", " ", 
+                    RowBox[{"img", " ", "=", " ", 
+                    RowBox[{"ImageRotate", "[", 
+                    RowBox[{
+                    RowBox[{"Rasterize", "[", "plt", "]"}], ",", " ", 
+                    RowBox[{
+                    RowBox[{"-", "90"}], " ", "Degree"}]}], "]"}]}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"comngap", " ", "=", " ", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"comm", ",", " ", "gap"}], "}"}], " ", "=", " ", 
+                    RowBox[{"process3", "[", 
+                    RowBox[{"lines", ",", " ", "LaserP", ",", " ", "step"}], 
+                    "]"}]}]}], ";", "\[IndentingNewLine]", 
+                    RowBox[{"Export", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"NotebookDirectory", "[", "]"}], " ", "<>", " ", 
+                    "\"\<commngap.mx\>\""}], ",", "comngap", ",", " ", 
+                    "\"\<MX\>\""}], "]"}], ";", "\[IndentingNewLine]", 
+                    RowBox[{"ImageSize", " ", "->", " ", 
+                    RowBox[{"{", 
+                    RowBox[{"80", ",", " ", "27"}], "}"}]}]}]}], 
+                    "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+                    "}"}], "]"}], ",", "\[IndentingNewLine]", 
+                  RowBox[{"ImageSize", " ", "->", " ", 
+                   RowBox[{"{", 
+                    RowBox[{"250", ",", " ", "250"}], "}"}]}]}], 
+                 "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
+                RowBox[{"Panel", "[", 
+                 RowBox[{
+                  RowBox[{"Dynamic", "[", 
+                   RowBox[{"Refresh", "[", 
+                    RowBox[{"img", ",", 
+                    RowBox[{"UpdateInterval", "\[Rule]", "0"}]}], "]"}], 
+                   "]"}], ",", " ", 
+                  RowBox[{"ImageSize", " ", "->", " ", 
+                   RowBox[{"{", 
+                    RowBox[{"200", ",", " ", "250"}], "}"}]}]}], "]"}]}], 
+               "\[IndentingNewLine]", "}"}], "]"}], "\[IndentingNewLine]", 
+             "]"}], ",", "\[IndentingNewLine]", "\n", "  ", 
+            RowBox[{"Panel", "[", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"c", "=", 
+                RowBox[{"RGBColor", "[", 
+                 RowBox[{"0.8117", ",", "0.5960", ",", "0.0274"}], "]"}]}], 
+               ";", "\[IndentingNewLine]", 
+               RowBox[{"temp", "=", "\"\<Device Out\>\""}], ";", 
+               "\[IndentingNewLine]", 
+               RowBox[{"t", "=", "False"}], ";", "\[IndentingNewLine]", 
+               RowBox[{"Column", "[", 
+                RowBox[{"{", "\[IndentingNewLine]", 
+                 RowBox[{
+                  RowBox[{"Style", "[", 
+                   RowBox[{
+                   "\"\<USB-Serial Device\>\"", ",", " ", "\"\<Title\>\"", 
+                    ",", " ", "20", ",", " ", 
+                    RowBox[{"RGBColor", "[", 
+                    RowBox[{"0.216", ",", " ", "0.659", ",", " ", "0.675"}], 
+                    "]"}]}], "]"}], ",", " ", "\[IndentingNewLine]", " ", 
+                  RowBox[{"Row", "[", 
+                   RowBox[{"{", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"PopupMenu", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", "x", "]"}], ",", " ", 
+                    RowBox[{"processGetDevices", "[", "]"}]}], "]"}], ",", 
+                    "\[IndentingNewLine]", "\"\<   \>\"", ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Button", "[", 
+                    RowBox[{"\"\<ON\>\"", ",", "\[IndentingNewLine]", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"onoff", "==", "0"}], ",", "\[IndentingNewLine]", 
+                    
+                    RowBox[{
+                    RowBox[{"c", " ", "=", " ", 
+                    RowBox[{"RGBColor", "[", 
+                    RowBox[{"0", ",", "1", ",", "0", ",", "0.5"}], "]"}]}], 
+                    ";", " ", "\[IndentingNewLine]", 
+                    RowBox[{"dev", " ", "=", " ", 
+                    RowBox[{"DeviceOpen", "[", 
+                    RowBox[{"\"\<Serial\>\"", ",", " ", 
+                    RowBox[{"{", " ", 
+                    RowBox[{"x", ",", " ", 
+                    RowBox[{"\"\<BaudRate\>\"", " ", "->", " ", "9600"}]}], 
+                    "}"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+                    RowBox[{"onoff", "=", "1"}]}], ",", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"c", "=", 
+                    RowBox[{"RGBColor", "[", 
+                    RowBox[{"0.8117", ",", "0.5960", ",", "0.0274"}], "]"}]}],
+                     ";", "\[IndentingNewLine]", 
+                    RowBox[{"DeviceClose", "[", "dev", "]"}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"onoff", "=", "0"}], ";"}]}], 
+                    "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", ",", 
+                    
+                    RowBox[{"Background", "\[Rule]", 
+                    RowBox[{"Dynamic", "[", "c", "]"}]}], ",", 
+                    RowBox[{"ImageSize", "\[Rule]", 
+                    RowBox[{"{", 
+                    RowBox[{"50", ",", "50"}], "}"}]}]}], "]"}], ",", 
+                    "\[IndentingNewLine]", " ", "\"\< \>\""}], 
+                    "\[IndentingNewLine]", "}"}], "]"}], ",", 
+                  "\[IndentingNewLine]", "\"\< \>\"", ",", "\n", "        ", 
+                  RowBox[{"Column", "[", 
+                   RowBox[{"{", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Slider", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", "n", "]"}], ",", " ", 
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", " ", "10", ",", " ", "0.1"}], "}"}]}], 
+                    "]"}], ",", 
+                    RowBox[{"Dynamic", "[", "n", "]"}]}], "}"}], "]"}], ",", 
+                    "\n", "            ", 
+                    RowBox[{"Button", "[", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    "\"\<Set Laser Power (Idle)\>\"", ",", " ", 
+                    "\"\<Title\>\"", ",", " ", "14", ",", " ", 
+                    RowBox[{"RGBColor", "[", 
+                    RowBox[{"0.216", ",", " ", "0.659", ",", " ", "0.675"}], 
+                    "]"}]}], "]"}], ",", "\[IndentingNewLine]", " ", 
+                    RowBox[{
+                    RowBox[{"DeviceWriteBuffer", "[", 
+                    RowBox[{"dev", ",", " ", 
+                    RowBox[{
+                    RowBox[{"StringPadLeft", "[", 
+                    RowBox[{
+                    RowBox[{"ToString", "[", "n", "]"}], ",", "3", ",", " ", 
+                    "\"\<0\>\""}], "]"}], " ", "<>", " ", 
+                    "\"\<r0m2l0\\n\>\""}]}], "]"}], ";", 
+                    "\[IndentingNewLine]", " ", 
+                    RowBox[{"Pause", "[", "0.2", "]"}]}]}], 
+                    "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+                    "}"}], "]"}], ",", "\[IndentingNewLine]", "\"\<  \>\"", 
+                  ",", "\[IndentingNewLine]", "\"\<  \>\"", ",", 
+                  "\[IndentingNewLine]", 
+                  RowBox[{"Style", "[", 
+                   RowBox[{
+                   "\"\<Writing Parameters\>\"", ",", " ", "\"\<Title\>\"", 
+                    ",", " ", "20", ",", " ", 
+                    RowBox[{"RGBColor", "[", 
+                    RowBox[{"0.216", ",", " ", "0.659", ",", " ", "0.675"}], 
+                    "]"}]}], "]"}], ",", "\[IndentingNewLine]", 
+                  RowBox[{"sldLaser", "=", 
+                   RowBox[{"Slider", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", "LaserP", "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "50", ",", "1"}], "}"}]}], "]"}]}], ",",
+                   "\[IndentingNewLine]", 
+                  RowBox[{
+                   RowBox[{"LaserP", "=", "40"}], ";", 
+                   RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    RowBox[{"Text", "[", "\"\<Laser Power(%): \>\"", "]"}], 
+                    ",", "12"}], "]"}], ",", 
+                    RowBox[{"Dynamic", "[", "LaserP", "]"}]}], "}"}], "]"}]}],
+                   ",", "\[IndentingNewLine]", 
+                  RowBox[{"sldStep", "=", 
+                   RowBox[{"Slider", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", "step", "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "1000", ",", "10"}], "}"}]}], "]"}]}], 
+                  ",", "\[IndentingNewLine]", 
+                  RowBox[{
+                   RowBox[{"step", "=", "150"}], ";", 
+                   RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    RowBox[{
+                    "Text", "[", "\"\<Step interval (ms): \>\"", "]"}], ",", 
+                    "12"}], "]"}], ",", 
+                    RowBox[{"Dynamic", "[", "step", "]"}]}], "}"}], "]"}]}], 
+                  ",", "\[IndentingNewLine]", 
+                  RowBox[{"Row", "[", 
+                   RowBox[{"{", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"Button", "[", 
+                    RowBox[{"\"\<RUN\>\"", ",", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"t", "=", "False"}], ";", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"comm", ",", " ", "gap"}], "}"}], " ", "=", " ", 
+                    RowBox[{"Import", "[", 
+                    RowBox[{
+                    RowBox[{"NotebookDirectory", "[", "]"}], " ", "<>", " ", 
+                    "\"\<commngap.mx\>\""}], "]"}]}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"temp", "=", "\"\<Running...\>\""}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"For", "[", 
+                    RowBox[{
+                    RowBox[{"ii", " ", "=", " ", "1"}], ",", " ", 
+                    RowBox[{"ii", " ", "<=", " ", 
+                    RowBox[{"Length", "[", "comm", "]"}]}], ",", " ", 
+                    RowBox[{"ii", "++"}], ",", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"If", "[", 
+                    RowBox[{"t", ",", 
+                    RowBox[{
+                    RowBox[{"temp", "=", "\"\<Stopped!\>\""}], ";", 
+                    RowBox[{"Break", "[", "]"}]}]}], "]"}], ";", 
+                    "\[IndentingNewLine]", " ", 
+                    RowBox[{"DeviceWriteBuffer", "[", 
+                    RowBox[{"dev", ",", " ", 
+                    RowBox[{"comm", "[", 
+                    RowBox[{"[", "ii", "]"}], "]"}]}], "]"}], ";", 
+                    "\[IndentingNewLine]", " ", 
+                    RowBox[{"Pause", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"gap", "[", 
+                    RowBox[{"[", "ii", "]"}], "]"}], " ", "*", " ", 
+                    SuperscriptBox["10", 
+                    RowBox[{"-", "3"}]]}], " ", "+", " ", "0.2"}], "]"}], 
+                    ";"}]}], "\[IndentingNewLine]", "]"}], ";"}], 
+                    "\[IndentingNewLine]", ",", 
+                    RowBox[{"ImageSize", "\[Rule]", 
+                    RowBox[{"{", 
+                    RowBox[{"70", ",", "40"}], "}"}]}], ",", 
+                    RowBox[{"Method", "\[Rule]", "\"\<Queued\>\""}]}], "]"}], 
+                    ",", "\[IndentingNewLine]", 
+                    RowBox[{"Button", "[", 
+                    RowBox[{"\"\<STOP\>\"", ",", 
+                    RowBox[{"t", "=", "True"}], ",", 
+                    RowBox[{"Method", "\[Rule]", "\"\<Preemptive\>\""}], ",", 
+                    
+                    RowBox[{"ImageSize", "\[Rule]", 
+                    RowBox[{"{", 
+                    RowBox[{"70", ",", "40"}], "}"}]}]}], "]"}]}], "}"}], 
+                   "]"}], ",", "\[IndentingNewLine]", 
+                  RowBox[{"Dynamic", "[", 
+                   RowBox[{"Refresh", "[", 
+                    RowBox[{"temp", ",", 
+                    RowBox[{"UpdateInterval", "\[Rule]", "0"}]}], "]"}], 
+                   "]"}]}], "\[IndentingNewLine]", "}"}], "]"}]}], ",", " ", 
+              RowBox[{"ImageSize", " ", "->", " ", 
+               RowBox[{"{", 
+                RowBox[{"450", ",", " ", "350"}], "}"}]}]}], 
+             "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "}"}], 
+          "]"}], "\[IndentingNewLine]", "]"}]}], ",", 
+       RowBox[{"WindowTitle", "->", "\"\<Stage & Laser Controller  \>\""}]}], 
+      "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"NotebookSave", "[", 
+     RowBox[{"palet", ",", 
+      RowBox[{
+       RowBox[{"NotebookDirectory", "[", "]"}], "<>", 
+       "\"\<ControllerPalette.nb\>\""}]}], "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"NotebookClose", "[", "palet", "]"}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.8727551524092073`*^9, 3.8727556033136787`*^9}, {
+   3.8727556404866037`*^9, 3.872755655468972*^9}, {3.8727557110441113`*^9, 
+   3.872755877682014*^9}, 3.872755944781159*^9, {3.872756212477379*^9, 
+   3.872756237010783*^9}, {3.8727562892231617`*^9, 3.872756351117793*^9}, {
+   3.872756387384713*^9, 3.8727564340449877`*^9}, {3.8727564787521763`*^9, 
+   3.872756498156867*^9}, {3.8727565298865623`*^9, 3.8727565642058992`*^9}, {
+   3.872760475678985*^9, 3.872760980067074*^9}, {3.872761055626492*^9, 
+   3.87276115106767*^9}, 3.872761211022232*^9, {3.872762245647354*^9, 
+   3.872762346635611*^9}, {3.872762611186119*^9, 3.872762625945265*^9}, {
+   3.872762702547853*^9, 3.87276270421371*^9}, {3.872855280772421*^9, 
+   3.872855374724975*^9}, {3.872855416508494*^9, 3.872855422383996*^9}, {
+   3.872855461413542*^9, 3.872855503036861*^9}, {3.872866917795079*^9, 
+   3.87286691925764*^9}, {3.8728669546487827`*^9, 3.8728670715704327`*^9}, {
+   3.872867103185595*^9, 3.872867167079486*^9}, {3.8728672507158213`*^9, 
+   3.87286725148608*^9}, {3.872867327851573*^9, 3.8728673385564528`*^9}, {
+   3.8728673962238197`*^9, 3.872867578618997*^9}, {3.872867612401125*^9, 
+   3.872867723971003*^9}, {3.872870543448812*^9, 3.872870544591922*^9}, {
+   3.8728706658801203`*^9, 3.872870666374613*^9}, {3.872870704715364*^9, 
+   3.872870705046164*^9}, {3.872870744722245*^9, 3.872870804515501*^9}, {
+   3.872870981153475*^9, 3.872871012580036*^9}, {3.8728711371555862`*^9, 
+   3.8728711413917923`*^9}, {3.872871194163225*^9, 3.872871195124763*^9}, {
+   3.872871245696412*^9, 3.8728713001815033`*^9}, {3.872871344556664*^9, 
+   3.872871379093688*^9}, {3.87287145075941*^9, 3.872871494255658*^9}, {
+   3.872871530464367*^9, 3.872871724393157*^9}, {3.872871764380384*^9, 
+   3.8728718417261887`*^9}, 3.872871893082562*^9, 3.872872000328541*^9, {
+   3.872872032789719*^9, 3.872872038636715*^9}, {3.872872123846965*^9, 
+   3.872872207672592*^9}, {3.872872269579295*^9, 3.8728722958444366`*^9}, {
+   3.872872330714776*^9, 3.872872348806446*^9}, {3.872872403714286*^9, 
+   3.872872407944536*^9}, {3.8728724574714937`*^9, 3.872872480850903*^9}, {
+   3.87287255411674*^9, 3.872872574000049*^9}, {3.872872604320943*^9, 
+   3.872872616968504*^9}, {3.872872715031283*^9, 3.8728727236604853`*^9}, {
+   3.87287275810879*^9, 3.872872787002882*^9}, {3.8728728701103573`*^9, 
+   3.872872937701288*^9}, {3.8728729937810497`*^9, 3.872872995557482*^9}, {
+   3.872873063879732*^9, 3.872873083495163*^9}, {3.872873123224649*^9, 
+   3.872873123837183*^9}, {3.872873203093693*^9, 3.8728732597874527`*^9}, {
+   3.8728733609645147`*^9, 3.872873426284523*^9}, {3.8728816883215313`*^9, 
+   3.8728816968159637`*^9}, {3.87288178459488*^9, 3.8728817975598516`*^9}, {
+   3.872881830789351*^9, 3.872881842797863*^9}, {3.87288421927573*^9, 
+   3.87288424226895*^9}, {3.8728844506637783`*^9, 3.872884473177878*^9}, {
+   3.872884526730764*^9, 3.872884611685068*^9}, {3.872884667746166*^9, 
+   3.872884698954167*^9}, {3.872884771330867*^9, 3.87288477595297*^9}, {
+   3.8728848314743147`*^9, 3.872884841882283*^9}, {3.872884914996169*^9, 
+   3.8728849284446917`*^9}, {3.872884967286549*^9, 3.872885004172018*^9}, {
+   3.872885107827298*^9, 3.872885138421562*^9}, {3.872885172333061*^9, 
+   3.872885179476439*^9}, {3.872885270376102*^9, 3.872885274607951*^9}, {
+   3.8728853208920813`*^9, 3.872885345925789*^9}, {3.8728854077658443`*^9, 
+   3.872885421056476*^9}, {3.872885457616292*^9, 3.872885491822343*^9}, {
+   3.8728855674774237`*^9, 3.8728856357217073`*^9}, {3.872885678446581*^9, 
+   3.8728857094605007`*^9}, {3.872885753302195*^9, 3.872885805553845*^9}},
+ CellLabel->
+  "In[134]:=",ExpressionUUID->"62194dec-9b10-492b-a48c-e56e6204b28d"],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.872884657010942*^9, 
+  3.872884658447261*^9}},ExpressionUUID->"503879ca-aca1-46cd-8eaf-\
+0ce53121aed0"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"ClearAll", "[", "\"\<Global`*\>\"", "]"}], ";"}], " "}]], "Input",\
+
+ CellLabel->
+  "In[133]:=",ExpressionUUID->"d85b4aae-d59a-46d6-9512-6f0e04dff72f"]
+},
+WindowSize->{1099, 824},
+WindowMargins->{{0, Automatic}, {Automatic, 9}},
+FrontEndVersion->"13.0 for Mac OS X ARM (64-bit) (February 4, 2022)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"f93a2380-02be-440a-9db8-b8159fa9a311"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 23541, 453, 2235, "Input",ExpressionUUID->"62194dec-9b10-492b-a48c-e56e6204b28d"],
+Cell[24102, 475, 152, 3, 30, "Input",ExpressionUUID->"503879ca-aca1-46cd-8eaf-0ce53121aed0"],
+Cell[24257, 480, 198, 6, 30, "Input",ExpressionUUID->"d85b4aae-d59a-46d6-9512-6f0e04dff72f"]
+}
+]
+*)
+

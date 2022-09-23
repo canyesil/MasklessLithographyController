@@ -1,0 +1,289 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     11137,        279]
+NotebookOptionsPosition[     10674,        261]
+NotebookOutlinePosition[     11124,        279]
+CellTagsIndexPosition[     11081,        276]
+WindowTitle->Stage & Laser Controller  
+WindowFrame->Palette*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ PanelBox[
+  TagBox[GridBox[{
+     {
+      PanelBox[
+       TemplateBox[{
+         PanelBox[
+          TagBox[
+           GridBox[{{
+              TagBox[
+               GridBox[{{
+                  InterpretationBox[
+                   Cell[
+                    BoxData[
+                    StyleBox[
+                    InterpretationBox[
+                    Cell[
+                    BoxData[
+                    FormBox[
+                    "\"Select input image\\n1.Click the \\\"Browse\\\" \
+button.\\n2.Choose an image to process.\"", TextForm]], "InlineText"], 
+                    Text[
+                    "Select input image\n1.Click the \"Browse\" button.\n\
+2.Choose an image to process."]], 12, StripOnInput -> False]]], 
+                   TextCell[
+                    Style[
+                    Text[
+                    "Select input image\n1.Click the \"Browse\" button.\n\
+2.Choose an image to process."], 12]]]}, {
+                  TemplateBox[{
+                    Dynamic[$CellContext`imgpath], "Open", {
+                    "Image files" -> {"*.bmp", "*.jpg", "*.png"}}}, 
+                   "FileNameSetterBoxes"]}, {
+                  SliderBox[
+                   Dynamic[$CellContext`sample], {1, 20, 1}]}, {
+                  TemplateBox[{
+                    StyleBox[
+                    InterpretationBox[
+                    Cell[
+                    BoxData[
+                    FormBox["\"Image Ratio: \"", TextForm]], "InlineText"], 
+                    Text["Image Ratio: "]], 12, StripOnInput -> False], 
+                    DynamicBox[
+                    ToBoxes[$CellContext`sample, StandardForm]]}, 
+                   "RowDefault"]}, {
+                  ButtonBox[
+                  "\"Upload\"", 
+                   ButtonFunction :> ({$CellContext`img, \
+$CellContext`cmretto, $CellContext`dim} = \
+$CellContext`process[$CellContext`imgpath, $CellContext`sample]; Null), 
+                   ImageSize -> {80, 27}, Appearance -> Automatic, Evaluator -> 
+                   Automatic, Method -> "Preemptive"]}}, 
+                GridBoxAlignment -> {"Columns" -> {{Left}}}, DefaultBaseStyle -> 
+                "Column", 
+                GridBoxItemSize -> {
+                 "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
+               "Column"]}, {
+              ButtonBox[
+              "\"Process\"", 
+               ButtonFunction :> ($CellContext`lines = \
+$CellContext`process2[$CellContext`dim, $CellContext`cmretto]; \
+$CellContext`plt = ListPlot[
+                   Accumulate[$CellContext`lines], 
+                   AspectRatio -> {$CellContext`dim}, PlotStyle -> 
+                   PointSize[0.008], ImageSize -> 200, Frame -> None, Axes -> 
+                   None, FrameTicks -> None]; $CellContext`img = ImageRotate[
+                   Rasterize[$CellContext`plt], (-90) 
+                   Degree]; $CellContext`comngap = ({$CellContext`comm, \
+$CellContext`gap} = $CellContext`process3[$CellContext`lines, \
+$CellContext`LaserP, $CellContext`step]); 
+                Export[NotebookDirectory[] <> 
+                  "commngap.mx", $CellContext`comngap, "MX"]; 
+                ImageSize -> {80, 27}), Appearance -> Automatic, Evaluator -> 
+               Automatic, Method -> "Preemptive"]}}, 
+            GridBoxAlignment -> {"Columns" -> {{Left}}}, DefaultBaseStyle -> 
+            "Column", 
+            GridBoxItemSize -> {
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Column"],
+           ImageSize -> {250, 250}], 
+         PanelBox[
+          DynamicBox[
+           ToBoxes[
+            Refresh[$CellContext`img, UpdateInterval -> 0], StandardForm]], 
+          ImageSize -> {200, 250}]},
+        "RowDefault"]]},
+     {
+      PanelBox[
+       TagBox[GridBox[{
+          {
+           StyleBox["\<\"USB-Serial Device\"\>", "Title",
+            StripOnInput->False,
+            LineColor->RGBColor[0.216, 0.659, 0.675],
+            FrontFaceColor->RGBColor[0.216, 0.659, 0.675],
+            BackFaceColor->RGBColor[0.216, 0.659, 0.675],
+            GraphicsColor->RGBColor[0.216, 0.659, 0.675],
+            FontSize->20,
+            FontColor->RGBColor[0.216, 0.659, 0.675]]},
+          {
+           TemplateBox[{
+             PopupMenuBox[
+              Dynamic[$CellContext`x], {
+              "/dev/cu.wlan-debug" -> "\"/dev/cu.wlan-debug\""}], "\"   \"", 
+             ButtonBox[
+             "\"ON\"", ButtonFunction :> 
+              If[$CellContext`onoff == 
+                0, $CellContext`c = RGBColor[0, 1, 0, 0.5]; $CellContext`dev = 
+                 DeviceOpen[
+                  "Serial", {$CellContext`x, "BaudRate" -> 
+                    9600}]; $CellContext`onoff = 1, $CellContext`c = 
+                 RGBColor[0.8117, 0.596, 0.0274]; 
+                DeviceClose[$CellContext`dev]; $CellContext`onoff = 0; Null], 
+              Background -> Dynamic[$CellContext`c], ImageSize -> {50, 50}, 
+              Appearance -> Automatic, Evaluator -> Automatic, Method -> 
+              "Preemptive"], "\" \""},
+            "RowDefault"]},
+          {"\<\" \"\>"},
+          {
+           TagBox[GridBox[{
+              {
+               TemplateBox[{
+                 SliderBox[
+                  Dynamic[$CellContext`n], {0, 10, 0.1}], 
+                 DynamicBox[
+                  ToBoxes[$CellContext`n, StandardForm]]},
+                "RowDefault"]},
+              {
+               ButtonBox[
+                StyleBox["\<\"Set Laser Power (Idle)\"\>", "Title",
+                 StripOnInput->False,
+                 LineColor->RGBColor[0.216, 0.659, 0.675],
+                 FrontFaceColor->RGBColor[0.216, 0.659, 0.675],
+                 BackFaceColor->RGBColor[0.216, 0.659, 0.675],
+                 GraphicsColor->RGBColor[0.216, 0.659, 0.675],
+                 FontSize->14,
+                 FontColor->RGBColor[0.216, 0.659, 0.675]],
+                Appearance->Automatic,
+                
+                ButtonFunction:>(
+                 DeviceWriteBuffer[$CellContext`dev, StringPadLeft[
+                    ToString[$CellContext`n], 3, "0"] <> "r0m2l0\n"]; 
+                 Pause[0.2]),
+                Evaluator->Automatic,
+                Method->"Preemptive"]}
+             },
+             DefaultBaseStyle->"Column",
+             GridBoxAlignment->{"Columns" -> {{Left}}},
+             
+             GridBoxItemSize->{
+              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+            "Column"]},
+          {"\<\"  \"\>"},
+          {"\<\"  \"\>"},
+          {
+           StyleBox["\<\"Writing Parameters\"\>", "Title",
+            StripOnInput->False,
+            LineColor->RGBColor[0.216, 0.659, 0.675],
+            FrontFaceColor->RGBColor[0.216, 0.659, 0.675],
+            BackFaceColor->RGBColor[0.216, 0.659, 0.675],
+            GraphicsColor->RGBColor[0.216, 0.659, 0.675],
+            FontSize->20,
+            FontColor->RGBColor[0.216, 0.659, 0.675]]},
+          {
+           SliderBox[Dynamic[$CellContext`LaserP], {0, 50, 1}]},
+          {
+           TemplateBox[{
+             StyleBox[
+              InterpretationBox[
+               Cell[
+                BoxData[
+                 FormBox["\"Laser Power(%): \"", TextForm]], "InlineText"], 
+               Text["Laser Power(%): "]], 12, StripOnInput -> False], 
+             DynamicBox[
+              ToBoxes[$CellContext`LaserP, StandardForm]]},
+            "RowDefault"]},
+          {
+           SliderBox[Dynamic[$CellContext`step], {0, 1000, 10}]},
+          {
+           TemplateBox[{
+             StyleBox[
+              InterpretationBox[
+               Cell[
+                BoxData[
+                 FormBox["\"Step interval (ms): \"", TextForm]], 
+                "InlineText"], 
+               Text["Step interval (ms): "]], 12, StripOnInput -> False], 
+             DynamicBox[
+              ToBoxes[$CellContext`step, StandardForm]]},
+            "RowDefault"]},
+          {
+           TemplateBox[{
+             ButtonBox[
+             "\"RUN\"", 
+              ButtonFunction :> ($CellContext`t = 
+                False; {$CellContext`comm, $CellContext`gap} = 
+                Import[NotebookDirectory[] <> 
+                  "commngap.mx"]; $CellContext`temp = "Running..."; 
+               For[$CellContext`ii = 1, $CellContext`ii <= 
+                 Length[$CellContext`comm], 
+                 Increment[$CellContext`ii], 
+                 If[$CellContext`t, $CellContext`temp = "Stopped!"; Break[]]; 
+                 DeviceWriteBuffer[$CellContext`dev, 
+                   Part[$CellContext`comm, $CellContext`ii]]; 
+                 Pause[Part[$CellContext`gap, $CellContext`ii] 10^(-3) + 0.2]; 
+                 Null]; Null), ImageSize -> {70, 40}, Method -> "Queued", 
+              Appearance -> Automatic, Evaluator -> Automatic], 
+             ButtonBox[
+             "\"STOP\"", ButtonFunction :> ($CellContext`t = True), Method -> 
+              "Preemptive", ImageSize -> {70, 40}, Appearance -> Automatic, 
+              Evaluator -> Automatic]},
+            "RowDefault"]},
+          {
+           DynamicBox[ToBoxes[
+             Refresh[$CellContext`temp, UpdateInterval -> 0], StandardForm],
+            ImageSizeCache->{54., {1., 8.}}]}
+         },
+         DefaultBaseStyle->"Column",
+         GridBoxAlignment->{"Columns" -> {{Left}}},
+         GridBoxItemSize->{
+          "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+        "Column"],
+       ImageSize->{450, 350}]}
+    },
+    DefaultBaseStyle->"Column",
+    GridBoxAlignment->{"Columns" -> {{Left}}},
+    GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+   "Column"]]],
+ CellMargins->{{0, 0}, {0, 0}},
+ CellBracketOptions->{"Color"->RGBColor[0.269993, 0.308507, 0.6]},
+ CellHorizontalScrolling->True,
+ PageBreakAbove->True,
+ PageBreakWithin->False,
+ ShowAutoStyles->True,
+ LineSpacing->{1.25, 0},
+ AutoItalicWords->{},
+ ScriptMinSize->9,
+ ShowStringCharacters->False,
+ FontFamily:>CurrentValue["PanelFontFamily"],
+ FontSize:>CurrentValue[
+  "PanelFontSize"],ExpressionUUID->"07f7989a-e790-4734-b876-194b11a62a68"]
+},
+WindowSize->All,
+WindowMargins->{{Automatic, 0}, {Automatic, 0}},
+WindowElements->{},
+WindowTitle->"Stage & Laser Controller  ",
+FrontEndVersion->"13.0 for Mac OS X ARM (64-bit) (February 4, 2022)",
+StyleDefinitions->"Palette.nb",
+ExpressionUUID->"70cc0b1f-715c-4e40-adc1-c6c6605ce1aa"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[599, 21, 10071, 238, 643, InheritFromParent,ExpressionUUID->"07f7989a-e790-4734-b876-194b11a62a68",
+ PageBreakAbove->True,
+ PageBreakWithin->False]
+}
+]
+*)
+
+(* End of internal cache information *)
+

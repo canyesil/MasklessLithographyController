@@ -1,7 +1,7 @@
 # MasklessLithographyController
 
 
-![alt text](https://github.com/canyesil/MasklessLithographyController/Application.png)
+![alt text](https://raw.githubusercontent.com/canyesil/MasklessLithographyController/main/Application.png?token=GHSAT0AAAAAABZDLOJBPEKDZCZNQWR4LDFMYZNCP3Q)
 
 
 Maskless lithography controller which consists of two parts, i.e.,
